@@ -1,0 +1,54 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "#Twilio Account"
+      ],
+      "metadata": {
+        "id": "QzVeBUfGwne-"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "account_sid = 'ACde2b15dad8f6e39c32b35eaa64921cf2'\n",
+        "\n",
+        "auth_token = '1928bb64202abc74a3ff94b70d5deec4'\n",
+        "\n",
+        "client = Client(account_sid, auth_token)\n",
+        "\n",
+        "message = client.messages \\\n",
+        "\n",
+        "    .create(\n",
+        "        \n",
+        "         body='Forest fire is detected , stay alert',\n",
+        "\n",
+        "         from_='+16075363954',\n",
+        "\n",
+        "         to='+919488200286'\n",
+        "         \n",
+        "     )\n",
+        "\n",
+        "print(message.sid)"
+      ],
+      "metadata": {
+        "id": "Q3k-FhR7xNhC"
+      }
+    }
+  ]
+}
