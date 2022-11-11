@@ -1,0 +1,144 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "3e9z-XinKTxD"
+      },
+      "outputs": [],
+      "source": [
+        "import keras\n",
+        "from keras.preprocessing.image import ImageDataGenerator"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Define the parameters/arguments for ImageDataGenerator class\n",
+        "train_datagen=ImageDataGenerator(rescale=1./255,shear_range=0.2,rotation_range=180,zoom_range=0.2,horizontal_flip=True)\n",
+        "\n",
+        "test_datagen=ImageDataGenerator(rescale=1./255)"
+      ],
+      "metadata": {
+        "id": "baZ4uMlEKenx"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Applying ImageDataGenerator functionality to trainset\n",
+        "x_train=train_datagen.flow_from_directory('/content/drive/MyDrive/Dataset/Dataset/train_set',target_size=(128,128),batch_size=32,class_mode='binary')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "aD3Cdwz9KhGa",
+        "outputId": "f22fe834-f81f-4d16-dcbe-982a0ed0ced4"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Found 436 images belonging to 2 classes.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Applying ImageDataGenerator functionality to testset\n",
+        "x_test=test_datagen.flow_from_directory('/content/drive/MyDrive/Dataset/Dataset/test_set',target_size=(128,128),batch_size=32,class_mode='binary')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vOonWNA3Knzm",
+        "outputId": "9aae78d4-0b8c-4db6-b153-09f171981898"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Found 121 images belonging to 2 classes.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#import model building libraries\n",
+        "\n",
+        "#To define Linear initialisation import Sequential\n",
+        "from keras.models import Sequential\n",
+        "#To add layers import Dense\n",
+        "from keras.layers import Dense\n",
+        "#To create Convolution kernel import Convolution2D\n",
+        "from keras.layers import Convolution2D\n",
+        "#import Maxpooling layer\n",
+        "from keras.layers import MaxPooling2D\n",
+        "#import flatten layer\n",
+        "from keras.layers import Flatten\n",
+        "import warnings\n",
+        "warnings.filterwarnings('ignore')"
+      ],
+      "metadata": {
+        "id": "PM4f8FIUKxVp"
+      },
+      "execution_count": 5,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#initializing the model\n",
+        "model=Sequential()"
+      ],
+      "metadata": {
+        "id": "ZcpxSXNLKztK"
+      },
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#add convolutional layer\n",
+        "model.add(Convolution2D(32,(3,3),input_shape=(128,128,3),activation='relu'))\n",
+        "#add maxpooling layer\n",
+        "model.add(MaxPooling2D(pool_size=(2,2)))\n",
+        "#add flatten layer \n",
+        "model.add(Flatten())"
+      ],
+      "metadata": {
+        "id": "PYLrbPbELRMT"
+      },
+      "execution_count": 8,
+      "outputs": []
+    }
+  ]
+}
